@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
 
 import Post from './components/Post';
+import ImageUpload from './components/ImageUpload';
 import './App.css';
 import { auth, db } from './firebase';
 
@@ -42,6 +43,7 @@ function App() {
 
   useEffect(() => {
     db.collection('posts')
+      .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot => {
         setPosts(snapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
     })
@@ -91,6 +93,11 @@ function App() {
 
   return (
     <div className="App">
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h4>Sorry you need login to upload</h4>
+      )}
       <Modal
         open={open}
         onClose={() => setOpen(false)}
