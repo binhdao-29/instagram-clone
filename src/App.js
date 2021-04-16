@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 
 import Post from './components/Post';
 import ImageUpload from './components/ImageUpload';
 import './App.css';
 import { auth, db } from './firebase';
+
+import home from './icons/home.svg';
+import messenger from './icons/messenger.svg';
+import compass from './icons/compass.svg';
+import heart from './icons/heart.svg';
 
 function getModalStyle() {
   const top = 50;
@@ -28,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  small: {
+    width: theme.spacing(3.2),
+    height: theme.spacing(3.2),
+  }
 }));
 
 function App() {
@@ -160,14 +170,27 @@ function App() {
           className="app__headerImage"
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" 
           alt="" />
-        {user? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-          ) : (
-          <div className="app__loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        <div className="app__headerBar">
+          <div className="app__headerIcons">
+            <img src={home} alt="" width={23} height={23} />
+            <img src={messenger} alt="" width={24} height={24} />
+            <img src={compass} alt="" width={24} height={24} />
+            <img src={heart} alt="" width={24} height={24} />
+            {user && <Avatar 
+              className={classes.small}
+              alt={user.displayName} 
+              src="/static/images/avatar/1.jpg" 
+              width={24} height={24} />}
           </div>
-        )}
+          {user? (
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+            ) : (
+            <div className="app__loginContainer">
+              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            </div>
+          )}
+        </div>
       </div>
       <div className="app__posts">
         {

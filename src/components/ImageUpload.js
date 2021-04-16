@@ -8,6 +8,7 @@ function ImageUpload({username}) {
     const [image, setImage] = useState(null);
     const [caption, setCaption] = useState('');
     const [progress, setProgress] = useState(0);
+    const [openProgress, setOpenProgress] = useState(false);
 
     const handleChange = (e) => {
         if (e.target.files[0]) {
@@ -16,6 +17,7 @@ function ImageUpload({username}) {
     }
 
     const handleUpload = () => {
+        setOpenProgress(true);
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
             "state_changed",
@@ -49,6 +51,7 @@ function ImageUpload({username}) {
                         setProgress(0);
                         setCaption("");
                         setImage(null);
+                        setOpenProgress(false);
                     })
             }
         )
@@ -56,7 +59,7 @@ function ImageUpload({username}) {
 
     return (
         <div className="image__upload">
-            <progress className="imageUpload__progress" value={progress} max="100"></progress>
+            {openProgress && <progress className="imageUpload__progress" value={progress} max="100"></progress>}
             <input type="text" 
                 placeholder="Enter a caption..." 
                 value={caption}

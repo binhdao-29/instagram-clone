@@ -1,15 +1,15 @@
 .post {
     background-color: white;
-    max-width: 500px;
-    border: 1px solid lightgray;
+    max-width: 600px;
+    border: 1px solid #dbdbdb;
     margin-bottom: 45px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post__image {
     width: 100%;
     object-fit: contain;
-    border-bottom: 1px solid lightgray;
-    border-top: 1px solid lightgray;
 }
 
 .post__text {
@@ -19,18 +19,36 @@
 
 .post__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+
+.post__headerAvatar {
+    display: flex;
+    align-items: center;
 }
 
 .post__avatar {
     margin-right: 10px;
 }
 
+.post__icons {
+    display: flex;
+    padding:10px 0 0 20px;
+}
+
+.post__icons > img {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
 .post__commentBox {
     display: flex;
     margin-top: 10px;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid #dbdbdb;
+    align-items: center;
+    padding: 10px;
 }
 
 .post__input {
